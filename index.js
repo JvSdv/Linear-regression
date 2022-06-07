@@ -1,9 +1,7 @@
-//pegar o botao com o id botao e adicionar um evento de click
-
-//
 document.getElementById("xi").value =
-  "1814 1814 1814 1644 1332 1389 1672 1871 1644 1644 1474 1474 1786 1757 1530 1786 1786";
-document.getElementById("yi").value = "92 66 66 100 233 300 113 66 99 99 159 159 123 123 186 83 93";
+  "62.43 66 58.16 50.52 22.74 25.27 35.33 41.15 43.3 45.28 40.95 37.46 47.59 51.8 55.88 66.13 63.54 67.25 69.32 75.13 76.33 72.99 78.52 84.38";
+document.getElementById("yi").value =
+  "108233 115645 113761 104172 73020 80506 87403 95056 102912 99399 94603 93952 108893 119017 115068 110035 116634 118989 126216 126802 121801 118780 110979 103501";
 
 document.getElementById("botao").addEventListener("click", function (e) {
   //previne o comportamento padrao do botao
