@@ -30,20 +30,7 @@ document.getElementById("botao").addEventListener("click", function (e) {
   let xi = xi1.map(Number);
   let yi = yi1.map(Number);
 
-  console.log(xi, yi);
-
-  function desvioPadrao(xi, yi) {
-    let desvioX = 0;
-    let desvioY = 0;
-    for (let i = 0; i < xi.length; i++) {
-      desvioX += Math.pow(xi[i] - Xmedia, 2);
-      desvioY += Math.pow(yi[i] - Ymedia, 2);
-    }
-    desvioX = Math.sqrt(desvioX / xi.length);
-    desvioY = Math.sqrt(desvioY / yi.length);
-    return [desvioX, desvioY];
-  }
-  console.log(desvioPadrao(xi, yi));
+  //console.log(xi, yi);
 
   let xiEyi = [];
 
@@ -65,6 +52,20 @@ document.getElementById("botao").addEventListener("click", function (e) {
   }
 
   media(xi, yi);
+
+  function desvioPadrao(xi, yi) {
+    let desvioX = 0;
+    let desvioY = 0;
+    for (let i = 0; i < xi.length; i++) {
+      desvioX += Math.pow(xi[i] - Xmedia, 2);
+      desvioY += Math.pow(yi[i] - Ymedia, 2);
+    }
+    desvioX = Math.sqrt(desvioX / xi.length);
+    desvioY = Math.sqrt(desvioY / yi.length);
+    return [desvioX, desvioY];
+  }
+  console.log("Desvio Padrao de X e Y:");
+  console.log(desvioPadrao(xi, yi));
 
   // fazer o Xmedia e Ymedia serem tres casas decimais e transformar em numeros
   Xmedia = Number(Xmedia.toFixed(3));
@@ -140,7 +141,7 @@ document.getElementById("botao").addEventListener("click", function (e) {
   somaXiMXmediaVYiMYmedia = parseFloat(somaXiMXmediaVYiMYmedia.toFixed(3));
   somaXiMXmedia2 = parseFloat(somaXiMXmedia2.toFixed(3));
 
-  console.log(somaXiMXmediaVYiMYmedia, somaXiMXmedia2);
+  //console.log(somaXiMXmediaVYiMYmedia, somaXiMXmedia2);
 
   //encontrar o valor de b
   let b = 0;
@@ -452,17 +453,17 @@ document.getElementById("botao").addEventListener("click", function (e) {
     r: r,
   };
 
-  console.log(obj);
+  //console.log(obj);
 
   //recuperar o objeto e salvar em um arquivo json
   let json = JSON.stringify(obj);
 
-  console.log(json);
+  //console.log(json);
 
   // transformar o json em um objeto
   let obj2 = JSON.parse(json);
 
-  console.log(obj2);
+  //console.log(obj2);
 
   //montar uma tabela com os dados de Xmedia, Ymedia, b, a, somaSqRes, somaSqReg, somaSqTot, r2, r
   let tabela2 =
