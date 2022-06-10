@@ -8,7 +8,6 @@ document.getElementById("botao").addEventListener("click", function (e) {
   e.preventDefault();
 
   //pegar o input com o id xi e yi e transformar em um array com o split
-
   let xi1 = document.getElementById("xi").value.split(" ");
   let yi1 = document.getElementById("yi").value.split(" ");
 
@@ -30,15 +29,14 @@ document.getElementById("botao").addEventListener("click", function (e) {
   let xi = xi1.map(Number);
   let yi = yi1.map(Number);
 
-  //console.log(xi, yi);
-
+  //colocar os valores de xi e yi em um array para usar no E-chart
   let xiEyi = [];
-
-  //colocar os valores de xi e yi em um array
   for (let i = 0; i < xi.length; i++) {
     xiEyi.push([xi[i], yi[i]]);
   }
 
+  ///AQUI COMEÇA AS CONTAS
+  //fazer a media dos valores de xi e yi
   let Xmedia = 0;
   let Ymedia = 0;
 
@@ -53,6 +51,8 @@ document.getElementById("botao").addEventListener("click", function (e) {
 
   media(xi, yi);
 
+  //////////////////////////////////////////////////////
+  //fazer o desvio padrao de xi e yi e so exibir no console
   function desvioPadrao(xi, yi) {
     let desvioX = 0;
     let desvioY = 0;
@@ -66,15 +66,9 @@ document.getElementById("botao").addEventListener("click", function (e) {
   }
   console.log("Desvio Padrao de X e Y:");
   console.log(desvioPadrao(xi, yi));
+  //////////////////////////////////////////////////////
 
-  // fazer o Xmedia e Ymedia serem tres casas decimais e transformar em numeros
-  Xmedia = Number(Xmedia.toFixed(3));
-  Ymedia = Number(Ymedia.toFixed(3));
-
-  // mostrar as medias no html com apenas três casas depois da vírgula (0.000)
-  //document.getElementById("media").innerHTML = "Xmedia: " + Xmedia.toFixed(3) + " Ymedia: " + Ymedia.toFixed(3);
-
-  //
+  // fazer todos os valores de xi e yi serem subtraídos do valor da media e colocar em um array
   let XiMXmedia = [];
   let YiMYmedia = [];
 
@@ -87,15 +81,9 @@ document.getElementById("botao").addEventListener("click", function (e) {
 
   diferenca(xi, yi);
 
-  // fazer todos os items da lista XiMXmedia e YiMYmedia serem tres casas depois da vírgula (0.000) e converter em numero
-  for (let i = 0; i < XiMXmedia.length; i++) {
-    XiMXmedia[i] = parseFloat(XiMXmedia[i].toFixed(3));
-    YiMYmedia[i] = parseFloat(YiMYmedia[i].toFixed(3));
-  }
-
+  //fazer todos os items da lista XiMXmedia serem multiplicados pelos items da lista YiMYmedia e armazenar em um array
   let XiMXmediaVYiMYmedia = [];
 
-  //fazer todos os items da lista XiMXmedia serem multiplicados pelos items da lista YiMYmedia e armazenar em um array
   function multiplicar(XiMXmedia, YiMYmedia) {
     for (let i = 0; i < XiMXmedia.length; i++) {
       XiMXmediaVYiMYmedia[i] = XiMXmedia[i] * YiMYmedia[i];
@@ -104,13 +92,8 @@ document.getElementById("botao").addEventListener("click", function (e) {
 
   multiplicar(XiMXmedia, YiMYmedia);
 
-  // fazer todos os items de XiMXmediaVYiMYmedia serem tres casas depois da vírgula (0.000) e converter em numero
-  for (let i = 0; i < XiMXmediaVYiMYmedia.length; i++) {
-    XiMXmediaVYiMYmedia[i] = parseFloat(XiMXmediaVYiMYmedia[i].toFixed(3));
-  }
-
-  let XiMXmedia2 = [];
   //fazer todos os items da lista XiMXmedia serem elevados ao quadrado e armazenar em um array
+  let XiMXmedia2 = [];
   function elevar(XiMXmedia) {
     for (let i = 0; i < XiMXmedia.length; i++) {
       XiMXmedia2[i] = XiMXmedia[i] * XiMXmedia[i];
@@ -119,12 +102,7 @@ document.getElementById("botao").addEventListener("click", function (e) {
 
   elevar(XiMXmedia);
 
-  // fazer todos os items de XiMXmedia2 serem tres casas depois da vírgula (0.000) e converter em numero
-  for (let i = 0; i < XiMXmedia2.length; i++) {
-    XiMXmedia2[i] = parseFloat(XiMXmedia2[i].toFixed(3));
-  }
-
-  //////////////////
+  //Somas dos itens de XiMXmediaVYiMYmedia e XiMXmedia2 e armazenar em uma variavel
   let somaXiMXmediaVYiMYmedia = 0;
   let somaXiMXmedia2 = 0;
 
@@ -136,12 +114,6 @@ document.getElementById("botao").addEventListener("click", function (e) {
   }
 
   somar(XiMXmediaVYiMYmedia, XiMXmedia2);
-
-  // fazer somaXiMXmediaVYiMYmedia e somaXiMXmedia2 serem tres casas depois da vírgula (0.000) e converter em numero
-  somaXiMXmediaVYiMYmedia = parseFloat(somaXiMXmediaVYiMYmedia.toFixed(3));
-  somaXiMXmedia2 = parseFloat(somaXiMXmedia2.toFixed(3));
-
-  //console.log(somaXiMXmediaVYiMYmedia, somaXiMXmedia2);
 
   //encontrar o valor de b
   let b = 0;
@@ -160,17 +132,7 @@ document.getElementById("botao").addEventListener("click", function (e) {
   bx(somaXiMXmediaVYiMYmedia, somaXiMXmedia2);
   ax(Ymedia, b);
 
-  //fazer a e b serem tres casas depois da vírgula (0.000) e converter em numero
-  a = parseFloat(a.toFixed(3));
-  b = parseFloat(b.toFixed(3));
-
-  console.log("a: " + a + " b: " + b);
-
-  //exibir a e b no html
-  //document.getElementById("a").innerHTML = "Alfa: " + a;
-  //document.getElementById("b").innerHTML = "Beta: " + b;
-
-  //////////
+  //fazer todos os items da reta usando a formula y = a + bx
   let y = [];
 
   function yi2(a, b, xi) {
@@ -180,11 +142,6 @@ document.getElementById("botao").addEventListener("click", function (e) {
   }
 
   yi2(a, b, xi);
-
-  // fazer todos os items de y serem tres casas depois da vírgula (0.000) e converter em numero
-  for (let i = 0; i < y.length; i++) {
-    y[i] = parseFloat(y[i].toFixed(3));
-  }
 
   // fazer o array do SqRes
   let SqRes = [];
@@ -197,11 +154,7 @@ document.getElementById("botao").addEventListener("click", function (e) {
 
   sqres(y, yi);
 
-  // fazer todos os items de SqRes serem tres casas depois da vírgula (0.000) e converter em numero
-  for (let i = 0; i < SqRes.length; i++) {
-    SqRes[i] = parseFloat(SqRes[i].toFixed(3));
-  }
-
+  // fazer todos os items de SqRes serrem elevados ao quadrado e armazenar em um array
   let SqRes2 = [];
 
   function sqres2(SqRes) {
@@ -212,12 +165,7 @@ document.getElementById("botao").addEventListener("click", function (e) {
 
   sqres2(SqRes);
 
-  //fazer todos os items de SqRes2 serem tres casas depois da vírgula (0.000) e converter em numero
-  for (let i = 0; i < SqRes2.length; i++) {
-    SqRes2[i] = parseFloat(SqRes2[i].toFixed(3));
-  }
-
-  // fazer o a soma de todos os items de SqRes
+  // fazer o a soma de todos os items de SqRes2
   let somaSqRes = 0;
 
   function somasqres(SqRes) {
@@ -227,12 +175,6 @@ document.getElementById("botao").addEventListener("click", function (e) {
   }
 
   somasqres(SqRes2);
-
-  // fazer somaSqRes serem tres casas depois da vírgula (0.000) e converter em numero
-  somaSqRes = parseFloat(somaSqRes.toFixed(3));
-
-  //exibir o valor de somaSqRes no html
-  //document.getElementById("sqres").innerHTML = "SqRes: " + somaSqRes;
 
   //fazer o array do SqReg
   let SqReg = [];
@@ -245,11 +187,6 @@ document.getElementById("botao").addEventListener("click", function (e) {
 
   sqreg(Ymedia, y);
 
-  // fazer todos os items de SqReg serem tres casas depois da vírgula (0.000) e converter em numero
-  for (let i = 0; i < SqReg.length; i++) {
-    SqReg[i] = parseFloat(SqReg[i].toFixed(3));
-  }
-
   // fazer todos os items de SqReg serem elevados ao quadrado e armazenar em um array
   let SqReg2 = [];
 
@@ -261,12 +198,7 @@ document.getElementById("botao").addEventListener("click", function (e) {
 
   sqreg2(SqReg);
 
-  //fazer todos os items de SqReg2 serem tres casas depois da vírgula (0.000) e converter em numero
-  for (let i = 0; i < SqReg2.length; i++) {
-    SqReg2[i] = parseFloat(SqReg2[i].toFixed(3));
-  }
-
-  // fazer o a soma de todos os items de SqReg
+  // fazer o a soma de todos os items de SqReg2
   let somaSqReg = 0;
 
   function somasqreg(SqReg2) {
@@ -276,12 +208,6 @@ document.getElementById("botao").addEventListener("click", function (e) {
   }
 
   somasqreg(SqReg2);
-
-  // fazer a somaSqReg serem tres casas depois da vírgula (0.000) e converter em numero
-  somaSqReg = parseFloat(somaSqReg.toFixed(3));
-
-  //exibir o valor de somaSqReg no html
-  //document.getElementById("sqreg").innerHTML = "SqReg: " + somaSqReg;
 
   //fazer o SqTot
   let SqTot = [];
@@ -294,11 +220,6 @@ document.getElementById("botao").addEventListener("click", function (e) {
 
   sqtot(yi, Ymedia);
 
-  // fazer todos os items de SqTot serem tres casas depois da vírgula (0.000) e converter em numero
-  for (let i = 0; i < SqTot.length; i++) {
-    SqTot[i] = parseFloat(SqTot[i].toFixed(3));
-  }
-
   // fazer todos os items de SqTot serem elevados ao quadrado e armazenar em um array
   let SqTot2 = [];
 
@@ -310,12 +231,7 @@ document.getElementById("botao").addEventListener("click", function (e) {
 
   sqtot2(SqTot);
 
-  //fazer todos os items de SqTot2 serem tres casas depois da vírgula (0.000) e converter em numero
-  for (let i = 0; i < SqTot2.length; i++) {
-    SqTot2[i] = parseFloat(SqTot2[i].toFixed(3));
-  }
-
-  // fazer o a soma de todos os items de SqTot
+  // fazer o a soma de todos os items de SqTot2
   let somaSqTot = 0;
 
   function somasqtot(SqTot2) {
@@ -326,18 +242,58 @@ document.getElementById("botao").addEventListener("click", function (e) {
 
   somasqtot(SqTot2);
 
-  // fazer somaSqTot serem tres casas depois da vírgula (0.000) e converter em numero
+  //calcular o valor de r²
+  let r2 = 0;
+  r2 = somaSqReg / somaSqTot;
+  //calcular o valor de r
+  let r = 0;
+  r = Math.sqrt(r2);
+  //se o beta for negativo, fazer o r ser negativo
+  if (b < 0) {
+    r = -r;
+  }
+
+  //Soma de X e Y faltou fazer
+  let somaX = 0;
+  let somaY = 0;
+
+  for (let i = 0; i < xi.length; i++) {
+    somaX += xi[i];
+    somaY += yi[i];
+  }
+
+  //fazer todos os arrays serem tres casas depois da vírgula (0.000) e converter em numero
+  for (let i = 0; i < xi.length; i++) {
+    xi[i] = parseFloat(xi[i].toFixed(3));
+    yi[i] = parseFloat(yi[i].toFixed(3));
+    XiMXmedia[i] = parseFloat(XiMXmedia[i].toFixed(3));
+    YiMYmedia[i] = parseFloat(YiMYmedia[i].toFixed(3));
+    XiMXmediaVYiMYmedia[i] = parseFloat(XiMXmediaVYiMYmedia[i].toFixed(3));
+    XiMXmedia2[i] = parseFloat(XiMXmedia2[i].toFixed(3));
+    y[i] = parseFloat(y[i].toFixed(3));
+    SqRes[i] = parseFloat(SqRes[i].toFixed(3));
+    SqRes2[i] = parseFloat(SqRes2[i].toFixed(3));
+    SqReg[i] = parseFloat(SqReg[i].toFixed(3));
+    SqReg2[i] = parseFloat(SqReg2[i].toFixed(3));
+    SqTot[i] = parseFloat(SqTot[i].toFixed(3));
+    SqTot2[i] = parseFloat(SqTot2[i].toFixed(3));
+  }
+
+  //somaX, SomaY, Xmedia, Ymedia, b, a, somaSqRes, somaSqReg, somaSqTot, r2, r
+  //serem tres casas depois da vírgula (0.000) e converter em numero
+  somaX = parseFloat(somaX.toFixed(3));
+  somaY = parseFloat(somaY.toFixed(3));
+  Xmedia = Number(Xmedia.toFixed(3));
+  Ymedia = Number(Ymedia.toFixed(3));
+  a = parseFloat(a.toFixed(3));
+  b = parseFloat(b.toFixed(3));
+  somaSqRes = parseFloat(somaSqRes.toFixed(3));
+  somaSqReg = parseFloat(somaSqReg.toFixed(3));
   somaSqTot = parseFloat(somaSqTot.toFixed(3));
-
-  //exibir o valor de somaSqTot no html
-  //document.getElementById("sqtot").innerHTML = "SqTot: " + somaSqTot;
-
-  //Xi-x̅
-  //Yi-y̅
-  //(Xi-x̅)*(Yi-y̅)
+  r2 = parseFloat(r2.toFixed(4));
+  r = parseFloat(r.toFixed(4));
 
   // fazer todos os items de todas as listas serem exibidos no html com uma tabela do bootstrap5
-  //fazer a mesma funcao de exibirTabela e colocar mais os valores de SqTot e SqTot2 e também trocar o "M" das variáveis por "-"
   function exibirTabela(
     xi,
     yi,
@@ -406,94 +362,54 @@ document.getElementById("botao").addEventListener("click", function (e) {
     SqTot2
   );
 
-  //calcular o valor de r²
-  let r2 = 0;
+  //montar uma tabela com os dados de somaX, somaY, Xmedia, Ymedia, n
+  let tabela3 =
+    "<div class='table-responsive'><table class='table table-bordered table-hover table-light table-striped table-sm'><thead class='table-dark'><tr><th scope='col'>somaX</th><th scope='col'>somaY</th> <th scope='col'>Xmedia</th> <th scope='col'>Ymedia</th> <th scope='col'>n</th></tr></thead><tbody>";
 
-  r2 = somaSqReg / somaSqTot;
+  tabela3 +=
+    "<tr><td>" +
+    somaX +
+    "</td><td>" +
+    somaY +
+    "</td><td>" +
+    Xmedia +
+    "</td><td>" +
+    Ymedia +
+    "</td><td>" +
+    xi.length +
+    "</td></tr>";
+  tabela3 += "</tbody></table></div>";
 
-  //exibir o valor de r2 no html
-  //document.getElementById("r2").innerHTML = "R²: " + r2.toFixed(4) + "%";
+  document.getElementById("tabela3").innerHTML = tabela3;
 
-  //calcular o valor de r
-  let r = 0;
-
-  r = Math.sqrt(r2);
-
-  //se o beta for negativo, fazer o r ser negativo
-  if (b < 0) {
-    r = -r;
-  }
-
-  //exibir o valor de r no html
-  //document.getElementById("r").innerHTML = "R: " + r.toFixed(4);
-
-  //criar um objeto com os arrays de xi, yi, XiMXmedia, YiMYmedia, XiMXmediaVYiMYmedia, XiMXmedia2, y, SqRes, SqRes2, SqReg, SqReg2, SqTot, SqTot2 e variaveis de a, b, somaSqRes, somaSqRes2, somaSqReg, somaSqReg2, somaSqTot, somaSqTot2 e r2, r
-  let obj = {
-    xi: xi,
-    yi: yi,
-    Xmedia: Xmedia,
-    Ymedia: Ymedia,
-    XiMXmedia: XiMXmedia,
-    YiMYmedia: YiMYmedia,
-    XiMXmediaVYiMYmedia: XiMXmediaVYiMYmedia,
-    XiMXmedia2: XiMXmedia2,
-    y: y,
-    SqRes: SqRes,
-    SqRes2: SqRes2,
-    SqReg: SqReg,
-    SqReg2: SqReg2,
-    SqTot: SqTot,
-    SqTot2: SqTot2,
-    a: a,
-    b: b,
-    somaSqRes: somaSqRes,
-    somaSqReg: somaSqReg,
-    somaSqTot: somaSqTot,
-    r2: r2,
-    r: r,
-  };
-
-  //console.log(obj);
-
-  //recuperar o objeto e salvar em um arquivo json
-  let json = JSON.stringify(obj);
-
-  //console.log(json);
-
-  // transformar o json em um objeto
-  let obj2 = JSON.parse(json);
-
-  //console.log(obj2);
-
-  //montar uma tabela com os dados de Xmedia, Ymedia, b, a, somaSqRes, somaSqReg, somaSqTot, r2, r
+  //montar uma tabela com os dados de b, a, somaSqRes, somaSqReg, somaSqTot, r2, r
   let tabela2 =
-    "<div class='table-responsive'><table class='table table-bordered table-hover table-light table-striped table-sm'><thead class='table-dark'><tr><th scope='col'>X media</th><th scope='col'>Y media</th> <th scope='col'>Beta</th> <th scope='col'>Alfa</th> <th scope='col'>SqRes</th> <th scope='col'>SqReg</th> <th scope='col'>SqTot</th> <th scope='col'>R²</th> <th scope='col'>R</th></tr></thead><tbody>";
+    "<div class='table-responsive'><table class='table table-bordered table-hover table-light table-striped table-sm'><thead class='table-dark'><tr><th scope='col'>Beta</th> <th scope='col'>Alfa</th> <th scope='col'>SqRes</th> <th scope='col'>SqReg</th> <th scope='col'>SqTot</th> <th scope='col'>R²</th> <th scope='col'>R</th></tr></thead><tbody>";
 
   tabela2 +=
     "<tr><td>" +
-    obj2.Xmedia +
+    b +
     "</td><td>" +
-    obj2.Ymedia +
+    a +
     "</td><td>" +
-    obj2.b +
+    somaSqRes +
     "</td><td>" +
-    obj2.a +
+    somaSqReg +
     "</td><td>" +
-    obj2.somaSqRes +
+    somaSqTot +
     "</td><td>" +
-    obj2.somaSqReg +
+    r2 +
     "</td><td>" +
-    obj2.somaSqTot +
-    "</td><td>" +
-    obj2.r2 +
-    "</td><td>" +
-    obj2.r +
+    r +
     "</td></tr>";
 
   tabela2 += "</tbody></table></div>";
   document.getElementById("tabela2").innerHTML = tabela2;
 
   /////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////
+  // Utilizando a bibioteca Chart.js para gerar um gráfico de linha
+
   var chartDom = document.getElementById("main");
   var myChart = echarts.init(chartDom);
   var option;
@@ -510,7 +426,7 @@ document.getElementById("botao").addEventListener("click", function (e) {
         transform: {
           type: "ecStat:regression",
           // 'linear' by default.
-          // config: { method: 'linear', formulaOn: 'end'}
+          config: { method: "linear", formulaOn: "end" },
         },
       },
     ],
