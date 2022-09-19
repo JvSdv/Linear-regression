@@ -1,3 +1,11 @@
+/* 62.43 66 58.16 50.52 22.74 25.27 35.33 41.15 43.3 45.28 40.95 37.46 47.59 51.8 55.88 66.13 63.54 67.25 69.32 75.13 76.33 72.99 78.52 84.38 */
+
+/* 3.90 3.94 3.90 3.95 4.05 4.10 4.05 4.00 4.04 4.07 4.08 4.10 4.09 4.00 3.96 3.98 3.95 3.97 3.94 3.93 3.97 3.95 3.94 3.87 3.85 3.90 3.93 3.89 3.90 3.95 4.08 4.04 4.02 4.00 3.90 3.96 3.96 4.02 4.10 4.12 4.10 4.16 4.13 4.06 4.00 4.04 4.10 4.15 4.09 4.09 4.13 4.08 4.04 4.07 4.09 4.01 3.99 3.99 3.95 3.94 3.95 3.93 3.98 4.03 4.05 3.94 3.99 4.08 4.09 4.05 3.98 3.98 3.98 3.97 3.95 4.00 3.95 3.97 3.97 3.92 3.97 3.98 3.98 3.97 3.95 3.99 4.04 3.95 3.97 4.01 3.92 3.91 3.85 3.84 3.80 3.79 3.84 3.72 3.62 3.64 3.59 3.63 3.60 3.53 3.51 3.54 3.56 3.64 3.65 3.68 */
+
+/* 3.87 3.90 3.93 3.96 3.97 4.01 4.11 4.04 3.98 4.04 4.07 4.08 4.11 4.10 4.00 3.95 3.95 3.95 3.97 3.94 3.93 3.96 3.97 3.94 3.86 3.88 3.87 3.97 3.88 3.89 3.90 4.08 4.04 3.98 4.01 3.93 3.96 3.96 4.04 4.11 4.14 4.10 4.16 4.13 4.06 4.04 4.04 4.11 4.15 4.10 4.12 4.15 4.08 4.05 4.07 4.09 4.00 3.99 3.97 3.99 3.97 3.92 3.93 3.98 4.02 4.06 3.91 3.96 4.09 4.10 4.03 3.99 3.96 4.04 3.97 3.95 4.01 3.95 3.97 3.97 3.91 3.98 3.97 3.98 3.96 3.96 3.99 4.02 3.95 4.00 4.01 3.92 3.93 3.85 3.84 3.84 3.79 3.84 3.70 3.63 3.65 3.59 3.61 3.60 3.54 3.50 3.56 3.51 3.61 3.65 */
+
+/* 108233 115645 113761 104172 73020 80506 87403 95056 102912 99399 94603 93952 108893 119017 115068 110035 116634 118989 126216 126802 121801 118780 110979 103501 */
+
 document.getElementById("xi").value =
   "62.43 66 58.16 50.52 22.74 25.27 35.33 41.15 43.3 45.28 40.95 37.46 47.59 51.8 55.88 66.13 63.54 67.25 69.32 75.13 76.33 72.99 78.52 84.38";
 document.getElementById("yi").value =
@@ -10,6 +18,10 @@ document.getElementById("botao").addEventListener("click", function (e) {
   //pegar o input com o id xi e yi e transformar em um array com o split
   let xi1 = document.getElementById("xi").value.split(" ");
   let yi1 = document.getElementById("yi").value.split(" ");
+  let Px = document.getElementById("Px").value;
+
+  //transforme Py em numero
+  Px = parseFloat(Px);
 
   //validar se o array tem o mesmo tamanho
   if (xi1.length != yi1.length) {
@@ -142,6 +154,8 @@ document.getElementById("botao").addEventListener("click", function (e) {
   }
 
   yi2(a, b, xi);
+
+  let Py = a + b * Px;
 
   // fazer o array do SqRes
   let SqRes = [];
@@ -364,7 +378,7 @@ document.getElementById("botao").addEventListener("click", function (e) {
 
   //montar uma tabela com os dados de somaX, somaY, Xmedia, Ymedia, n
   let tabela3 =
-    "<div class='table-responsive'><table class='table table-bordered table-hover table-light table-striped table-sm'><thead class='table-dark'><tr><th scope='col'>somaX</th><th scope='col'>somaY</th> <th scope='col'>Xmedia</th> <th scope='col'>Ymedia</th> <th scope='col'>n</th></tr></thead><tbody>";
+    "<div class='table-responsive'><table class='table table-bordered table-hover table-light table-striped table-sm'><thead class='table-dark'><tr><th scope='col'>somaX</th><th scope='col'>somaY</th> <th scope='col'>Xmedia</th> <th scope='col'>Ymedia</th> <th scope='col'>Ponto Y</th> <th scope='col'>n</th></tr></thead><tbody>";
 
   tabela3 +=
     "<tr><td>" +
@@ -375,6 +389,8 @@ document.getElementById("botao").addEventListener("click", function (e) {
     Xmedia +
     "</td><td>" +
     Ymedia +
+    "</td><td>" +
+    Py +
     "</td><td>" +
     xi.length +
     "</td></tr>";
